@@ -52,7 +52,6 @@ namespace WebAddressbookTests
             FillGroupForm("test", "test", "test");
             SubmitGroupCreation();
             ReturnToGroupsPage();
-            //driver.FindElement(By.LinkText("Logout")).Click();
         }
 
         private void ReturnToGroupsPage()
