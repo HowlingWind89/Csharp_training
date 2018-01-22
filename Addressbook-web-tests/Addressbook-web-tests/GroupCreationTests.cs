@@ -57,11 +57,7 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
         }
 
-        private void FillGroupForm(GroupData groupData)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         private void ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
