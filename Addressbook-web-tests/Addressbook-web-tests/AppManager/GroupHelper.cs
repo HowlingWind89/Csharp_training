@@ -11,7 +11,7 @@ namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
 
         public GroupHelper(IWebDriver driver) : base(driver)
         {

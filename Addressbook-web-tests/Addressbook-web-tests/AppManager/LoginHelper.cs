@@ -11,7 +11,7 @@ namespace WebAddressbookTests
 {
     public class LoginHelper : HelperBase
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
         public LoginHelper(IWebDriver driver) : base(driver)
         {
  
