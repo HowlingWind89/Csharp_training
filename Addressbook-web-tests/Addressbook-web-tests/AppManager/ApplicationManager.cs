@@ -20,6 +20,12 @@ namespace WebAddressbookTests
 
         public ApplicationManager()
         {
+            FirefoxOptions options = new FirefoxOptions();
+            options.BrowserExecutableLocation = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+            options.UseLegacyImplementation = true;
+            driver = new FirefoxDriver(options);
+            baseURL = "http://localhost/";
+
             loginHelper = new LoginHelper(driver);
             navigationHelper = new NavigationHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
