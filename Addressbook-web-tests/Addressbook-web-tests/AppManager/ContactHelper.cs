@@ -18,6 +18,28 @@ namespace WebAddressbookTests
 
         }
 
+        public ContactHelper ModifyContact(ContactData newContactData)
+        {
+            SelectContact();
+            InitContactModification();
+            FillNewContactForm(newContactData);
+            SubmitContactModification();
+            manager.Navigator.ReturnToMainPage();
+            return this;
+        }
+
+        public ContactHelper InitContactModification()
+        {
+            driver.FindElement(By.CssSelector("img[alt=\"Edit\"]")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.CssSelector("input[name='update']")).Click();
+            return this;
+        }
+
         public ContactHelper CreateContact(ContactData contact)
         {
             manager.Navigator.GoToAddNewPage();
@@ -33,6 +55,7 @@ namespace WebAddressbookTests
 
             SelectContact();
             RemoveContact();
+            ConfirmAlert();
             manager.Navigator.ReturnToMainPage();
 
             return this;
@@ -64,6 +87,24 @@ namespace WebAddressbookTests
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
+        public ContactHelper ConfirmAlert()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert confirmAlert = driver.SwitchTo().Alert();
+            confirmAlert.Accept();
+            return this;
+        }
+
+        public ContactHelper CancelAlert()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            IAlert cancelAlert = driver.SwitchTo().Alert();
+            cancelAlert.Dismiss();
             return this;
         }
     }
