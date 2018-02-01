@@ -17,7 +17,7 @@ namespace WebAddressbookTests
         {
             ContactData newContactData = new ContactData ("QATester");
             newContactData.FirstName = ("QATester");
-            newContactData.LastName = ("QATester");
+            newContactData.LastName = (null);
 
             app.Contact.ModifyContact(newContactData);
         }

@@ -19,11 +19,10 @@ namespace WebAddressbookTests
 
         public void Login(AccountData account)
         {
-            base.driver.FindElement(By.Name("user")).Clear();
-            base.driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            base.driver.FindElement(By.Name("pass")).Clear();
-            base.driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            base.driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+
+            Type(By.Name("user"), account.Username);
+            Type(By.Name("pass"), account.Password);
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
     }
 }
