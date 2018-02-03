@@ -9,13 +9,12 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+     public class AuthTestBase : TestBase
     {
-        [Test]
-        public void GroupRemovalTest()
+        [SetUp]
+        public void SetupLogin()
         {
-            app.Groups.Remove(1);
+            app.Auth.Login(new AccountData("admin", "secret"));
         }
     }
 }
