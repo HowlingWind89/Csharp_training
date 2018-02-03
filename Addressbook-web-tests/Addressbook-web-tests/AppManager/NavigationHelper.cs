@@ -43,7 +43,11 @@ namespace WebAddressbookTests
         }
 
         public void ReturnToMainPage()
-        {
+        { 
+            if(driver.Url == baseURL + "/addressbook/")
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("home")).Click();
         }
     }

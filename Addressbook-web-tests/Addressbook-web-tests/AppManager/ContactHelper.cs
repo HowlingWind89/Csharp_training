@@ -21,12 +21,24 @@ namespace WebAddressbookTests
         public ContactHelper ModifyContact(ContactData newContactData)
         {
             manager.Navigator.ReturnToMainPage();
-            SelectContact();
-            InitContactModification();
-            FillNewContactForm(newContactData);
-            SubmitContactModification();
-            manager.Navigator.ReturnToMainPage();
-            return this;
+
+            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
+            {
+                SelectContact();
+                InitContactModification();
+                FillNewContactForm(newContactData);
+                SubmitContactModification();
+                manager.Navigator.ReturnToMainPage();
+                return this;
+            }
+            else
+            {
+                ContactData contact = new ContactData("Tester");
+                contact.LastName = ("Testerov");
+                manager.Contact.CreateContact(contact);
+                manager.Contact.ModifyContact(newContactData);
+                return this;
+            }
         }
 
         public ContactHelper InitContactModification()
@@ -54,13 +66,25 @@ namespace WebAddressbookTests
         public ContactHelper Remove()
         {
             manager.Navigator.ReturnToMainPage();
-            SelectContact();
-            RemoveContact();
-            ConfirmAlert();
-            manager.Navigator.ReturnToMainPage();
 
-            return this;
+            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
+            {
+                SelectContact();
+                RemoveContact();
+                ConfirmAlert();
+                manager.Navigator.ReturnToMainPage();
+                return this;
+            }
+            else
+            {
+                ContactData contact = new ContactData("Tester");
+                contact.LastName = ("Testerov");
+                manager.Contact.CreateContact(contact);
+                manager.Contact.Remove();
+                return this;
+            }
         }
+
         public ContactHelper FillNewContactForm(ContactData contact)
         {
 
