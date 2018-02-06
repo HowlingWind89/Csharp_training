@@ -19,7 +19,7 @@ namespace WebAddressbookTests
             newContactData.FirstName = ("QATester");
             newContactData.LastName = (null);
 
-            app.Contact.ModifyContact(newContactData);
+            app.Contact.IsContactExistsAndModify(newContactData);
         }
     }
 }

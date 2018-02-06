@@ -15,7 +15,7 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            app.Groups.Remove();
+            app.Groups.IsGroupExistsAndRemove();
         }
     }
 }

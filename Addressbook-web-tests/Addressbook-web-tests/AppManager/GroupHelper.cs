@@ -31,22 +31,12 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToGroupsPage();
 
-            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
-            {
-                SelectGroup();
+                SelectGroup(v);
                 InitGroupModification();
                 FillGroupForm(newData);
                 SubmitGroupModification();
                 ReturnToGroupsPage();
                 return this;
-            }
-            else
-            {
-                GroupData group = new GroupData("test");
-                manager.Groups.Create(group);
-                manager.Groups.Modify(1, newData);
-                return this;
-            }
         }
 
         public GroupHelper SubmitGroupModification()
@@ -61,26 +51,14 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Remove()
+        public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
 
-            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
-            {
-                SelectGroup();
+                SelectGroup(v);
                 RemoveGroup();
                 ReturnToGroupsPage();
                 return this;
-            }
-            else
-            {
-                GroupData group = new GroupData("test");
-                group.Header = ("test");
-                group.Footer = ("test");
-                manager.Groups.Create(group);
-                manager.Groups.Remove();
-                return this;
-            }
         }
 
         public GroupHelper InitNewGroupCreation()
@@ -110,9 +88,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper SelectGroup()
+        public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.CssSelector("input[name=\"selected[]\"]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
 
@@ -122,5 +100,38 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper IsGroupExistsAndRemove()
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
+            {
+                manager.Groups.Remove(1);
+            }
+            else
+            {
+                GroupData group = new GroupData("test");
+                group.Header = ("test");
+                group.Footer = ("test");
+                manager.Groups.Create(group);
+            }
+            return this;
+        }
+
+        public GroupHelper IsGroupExistsAndModify(GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
+            {
+                manager.Groups.Modify(1, newData);
+            }
+            else
+            {
+                GroupData group = new GroupData("test");
+                group.Header = ("test");
+                group.Footer = ("test");
+                manager.Groups.Create(group);
+            }
+            return this;
+        }
     }
 }
