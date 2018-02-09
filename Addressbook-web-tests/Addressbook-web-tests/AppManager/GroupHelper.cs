@@ -90,7 +90,7 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
 
@@ -105,7 +105,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
             {
-                manager.Groups.Remove(1);
+                manager.Groups.Remove(0);
             }
             else
             {
@@ -122,7 +122,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
             {
-                manager.Groups.Modify(1, newData);
+                manager.Groups.Modify(0, newData);
             }
             else
             {
@@ -133,5 +133,19 @@ namespace WebAddressbookTests
             }
             return this;
         }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach(IWebElement element in elements)
+            {
+                //GroupData group = new GroupData (element.Text);
+                groups.Add (new GroupData(element.Text));
+            }
+            return groups;
+        }
+
     }
 }
