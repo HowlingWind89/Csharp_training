@@ -143,7 +143,7 @@ namespace WebAddressbookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.ReturnToMainPage();
-            ICollection<IWebElement>elements = driver.FindElements(By.CssSelector("td.center"));
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name=\"entry"));
             foreach(IWebElement element in elements)
             {
                 //ContactData contact = new ContactData(element.Text);
