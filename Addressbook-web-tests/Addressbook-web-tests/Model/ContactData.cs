@@ -11,10 +11,12 @@ namespace WebAddressbookTests
         private string first;
         private string last;
 
-        public ContactData(string first)
+        public ContactData(string last, string first)
         {
+            this.last = last;
             this.first = first;
         }
+
         public bool Equals(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -25,17 +27,17 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return LastName + FirstName == other.LastName + other.FirstName;
+            return LastName == other.LastName && FirstName == other.FirstName;
         }
 
         public override int GetHashCode()
         {
-          return LastName.GetHashCode() + LastName.GetHashCode();
+          return LastName.GetHashCode() + FirstName.GetHashCode();
         }
 
         public override string ToString()
         {
-            return "contact=" + LastName + FirstName;
+            return " LastName= " + LastName + " FirstName= " + FirstName;
         }
         public int CompareTo(ContactData other)
         {

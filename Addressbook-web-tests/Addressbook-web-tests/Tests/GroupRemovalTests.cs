@@ -19,6 +19,7 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.IsGroupExistsAndRemove();
+            app.Groups.Remove(0);
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
 

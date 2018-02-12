@@ -20,6 +20,8 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.IsGroupExistsAndModify(newData);
+            app.Groups.Modify(0, newData);
+
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[0].Name = newData.Name;

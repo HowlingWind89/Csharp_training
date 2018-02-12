@@ -105,7 +105,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
             {
-                manager.Groups.Remove(0);
+                return this;
             }
             else
             {
@@ -113,8 +113,9 @@ namespace WebAddressbookTests
                 group.Header = ("test");
                 group.Footer = ("test");
                 manager.Groups.Create(group);
+                return this;
             }
-            return this;
+            
         }
 
         public GroupHelper IsGroupExistsAndModify(GroupData newData)
@@ -122,7 +123,7 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
             {
-                manager.Groups.Modify(0, newData);
+                return this;
             }
             else
             {
@@ -130,8 +131,9 @@ namespace WebAddressbookTests
                 group.Header = ("test");
                 group.Footer = ("test");
                 manager.Groups.Create(group);
+                return this;
             }
-            return this;
+            
         }
 
         public List<GroupData> GetGroupList()

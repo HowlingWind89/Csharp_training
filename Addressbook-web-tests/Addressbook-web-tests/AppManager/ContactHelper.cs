@@ -111,43 +111,45 @@ namespace WebAddressbookTests
 
         public ContactHelper IsContactExistsAndRemove()
         {
+            manager.Navigator.ReturnToMainPage();
             if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
             {
-                manager.Contact.Remove();
+                return this;
             }
             else
             {
-                ContactData contact = new ContactData("Tester");
-                contact.LastName = ("Testerov");
+                ContactData contact = new ContactData("Testerov", "Tester");
                 manager.Contact.CreateContact(contact);
+                return this;
             }
-            return this;
         }
 
         public ContactHelper IsContactExistsAndModify(ContactData newContactData)
         {
+            manager.Navigator.ReturnToMainPage();
             if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
             {
-                manager.Contact.ModifyContact(newContactData);
+                return this;
             }
             else
             {
-                ContactData contact = new ContactData("Tester");
-                contact.LastName = ("Testerov");
+                ContactData contact = new ContactData("Testerov", "Tester");
                 manager.Contact.CreateContact(contact);
+                return this;
             }
-            return this;
+            
         }
 
         public List<ContactData> GetContactList()
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.ReturnToMainPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name=\"entry"));
-            foreach(IWebElement element in elements)
-            {
-                //ContactData contact = new ContactData(element.Text);
-                contacts.Add(new ContactData(element.Text));
+            ICollection<IWebElement> LastName = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[2]"));
+            ICollection <IWebElement> FirstName = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[3]"));
+            foreach (IWebElement elementLast in LastName)
+            foreach (IWebElement elementFirst in FirstName)
+                {
+              contacts.Add(new ContactData(elementLast.Text, elementFirst.Text));
             }
             return contacts;
         }
