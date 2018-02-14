@@ -18,11 +18,11 @@ namespace WebAddressbookTests
 
         }
 
-        public ContactHelper ModifyContact(ContactData newContactData)
+        public ContactHelper ModifyContact(int v, ContactData newContactData)
         {
             manager.Navigator.ReturnToMainPage();
 
-                SelectContact();
+                SelectContact(v);
                 InitContactModification();
                 FillNewContactForm(newContactData);
                 SubmitContactModification();
@@ -52,10 +52,10 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper Remove()
+        public ContactHelper Remove(int v)
         {
             manager.Navigator.ReturnToMainPage();
-                SelectContact();
+                SelectContact(v);
                 RemoveContact();
                 ConfirmAlert();
                 manager.Navigator.ReturnToMainPage();
@@ -79,9 +79,9 @@ namespace WebAddressbookTests
 
 
 
-        public ContactHelper SelectContact()
+        public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.CssSelector("input[name=\"selected[]\"]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -109,36 +109,6 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper IsContactExistsAndRemove()
-        {
-            manager.Navigator.ReturnToMainPage();
-            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
-            {
-                return this;
-            }
-            else
-            {
-                ContactData contact = new ContactData("Testerov", "Tester");
-                manager.Contact.CreateContact(contact);
-                return this;
-            }
-        }
-
-        public ContactHelper IsContactExistsAndModify(ContactData newContactData)
-        {
-            manager.Navigator.ReturnToMainPage();
-            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
-            {
-                return this;
-            }
-            else
-            {
-                ContactData contact = new ContactData("Testerov", "Tester");
-                manager.Contact.CreateContact(contact);
-                return this;
-            }
-            
-        }
 
         public List<ContactData> GetContactList()
         {

@@ -32,7 +32,7 @@ namespace WebAddressbookTests
 
         public override int GetHashCode()
         {
-          return LastName.GetHashCode() + FirstName.GetHashCode();
+            return LastName.GetHashCode() + FirstName.GetHashCode();
         }
 
         public override string ToString()
