@@ -144,16 +144,22 @@ namespace WebAddressbookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.ReturnToMainPage();
-            ICollection<IWebElement> tableRow = driver.FindElements(By.CssSelector("tr[name=\"entry]"));
+            ICollection<IWebElement> tableRows = driver.FindElements(By.CssSelector("tr[name=\"entry]"));
+            foreach(IWebElement element in tableRows)
+            {
+                string LastName = element.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[2]")).Text;
+                string FirstName = element.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[3]")).Text;
+                contacts.Add(new ContactData(LastName, FirstName));
+            }
+            return contacts;
 
-            ICollection<IWebElement> LastName = tableRow = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[2]"));
-            ICollection<IWebElement> FirstName = tableRow = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[3]"));
-            foreach (IWebElement elementLast in LastName)
+            
+            /*foreach (IWebElement elementLast in LastName)
             foreach (IWebElement elementFirst in FirstName)
             {
                 contacts.Add(new ContactData(elementLast.Text, elementFirst.Text));       
             }
-            return contacts;
+            return contacts;*/
 
             /*manager.Navigator.ReturnToMainPage();
             ICollection <IWebElement> FirstName = tableRow = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[3]"));
