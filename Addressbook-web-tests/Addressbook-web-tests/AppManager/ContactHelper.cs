@@ -109,6 +109,18 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool IsContactExists()
+        {
+            manager.Navigator.ReturnToMainPage();
+            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public List<ContactData> GetContactList()
         {

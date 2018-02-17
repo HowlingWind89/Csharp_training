@@ -19,14 +19,24 @@ namespace WebAddressbookTests
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            app.Groups.Modify(0, newData);
+            if(app.Groups.IsGroupExists() == true)
+            {
+                app.Groups.Modify(0, newData);
+
+                List<GroupData> newGroups = app.Groups.GetGroupList();
+                oldGroups[0].Name = newData.Name;
+                oldGroups.Sort();
+                newGroups.Sort();
+                Assert.AreEqual(oldGroups, newGroups);
+            }
+            else if(app.Groups.IsGroupExists() == false)
+            {
+                GroupData group = new GroupData("test");
+                app.Groups.Create(group);
+            }
+          
 
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups[0].Name = newData.Name;
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
         }
 
     }

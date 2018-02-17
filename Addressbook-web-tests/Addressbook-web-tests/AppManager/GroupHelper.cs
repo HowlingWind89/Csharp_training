@@ -100,40 +100,17 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper IsGroupExistsAndRemove()
+        public bool IsGroupExists()
         {
             manager.Navigator.GoToGroupsPage();
             if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
             {
-                return this;
+                return true;
             }
             else
             {
-                GroupData group = new GroupData("test");
-                group.Header = ("test");
-                group.Footer = ("test");
-                manager.Groups.Create(group);
-                return this;
+                return false;
             }
-            
-        }
-
-        public GroupHelper IsGroupExistsAndModify(GroupData newData)
-        {
-            manager.Navigator.GoToGroupsPage();
-            if (IsElementPresent(By.CssSelector("input[name=\"selected[]\"]")))
-            {
-                return this;
-            }
-            else
-            {
-                GroupData group = new GroupData("test");
-                group.Header = ("test");
-                group.Footer = ("test");
-                manager.Groups.Create(group);
-                return this;
-            }
-            
         }
 
         public List<GroupData> GetGroupList()
@@ -143,7 +120,6 @@ namespace WebAddressbookTests
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach(IWebElement element in elements)
             {
-                //GroupData group = new GroupData (element.Text);
                 groups.Add (new GroupData(element.Text));
             }
             return groups;

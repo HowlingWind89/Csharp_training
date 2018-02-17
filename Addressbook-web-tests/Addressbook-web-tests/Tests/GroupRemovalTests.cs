@@ -16,15 +16,23 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            if (app.Groups.IsGroupExists() == true)
+            {
+                List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            app.Groups.Remove(0);
+                app.Groups.Remove(0);
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+                List<GroupData> newGroups = app.Groups.GetGroupList();
 
-            oldGroups.RemoveAt(0);
+                oldGroups.RemoveAt(0);
 
-            Assert.AreEqual(oldGroups, newGroups);
+                Assert.AreEqual(oldGroups, newGroups);
+            }
+            else if(app.Groups.IsGroupExists() == false)
+            {
+                GroupData group = new GroupData("test");
+                app.Groups.Create(group);
+            }
         }
     }
 }
