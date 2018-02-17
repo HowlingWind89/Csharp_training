@@ -16,10 +16,10 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            List<ContactData> oldContacts = app.Contact.GetContactList();
-
             if (app.Contact.IsContactExists() == true)
             {
+                List<ContactData> oldContacts = app.Contact.GetContactList();
+
                 app.Contact.Remove(0);
 
                 List<ContactData> newContacts = app.Contact.GetContactList();

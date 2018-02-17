@@ -20,10 +20,10 @@ namespace WebAddressbookTests
             newContactData.FirstName = ("QATester");
             newContactData.LastName = ("QATesterov");
 
-            List<ContactData> oldContacts = app.Contact.GetContactList();
-
             if (app.Contact.IsContactExists() == true)
             {
+                List<ContactData> oldContacts = app.Contact.GetContactList();
+
                 app.Contact.ModifyContact(0, newContactData);
 
                 List<ContactData> newContacts = app.Contact.GetContactList();
