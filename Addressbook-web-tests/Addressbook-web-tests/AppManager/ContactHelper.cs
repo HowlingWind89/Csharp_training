@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -198,6 +199,14 @@ namespace WebAddressbookTests
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone
             };
+        }
+
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.ReturnToMainPage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
         }
     }
 }

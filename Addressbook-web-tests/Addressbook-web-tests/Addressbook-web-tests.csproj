@@ -77,6 +77,7 @@
     <Compile Include="AppManager\NavigationHelper.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="Tests\LoginTests.cs" />
+    <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
