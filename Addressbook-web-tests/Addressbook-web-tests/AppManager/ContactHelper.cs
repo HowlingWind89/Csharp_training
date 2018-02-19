@@ -208,5 +208,21 @@ namespace WebAddressbookTests
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
         }
+
+       /* public ContactHelper OpenContactDetailsPage(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
+            return this;
+        }
+
+        public ContactData GetContactInformationFromDetailsPage(int index)
+        {
+            manager.Navigator.ReturnToMainPage();
+            OpenContactDetailsPage(0);
+
+
+        }*/
     }
 }
