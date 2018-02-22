@@ -11,6 +11,7 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private string contactDetailsPageText;
 
         public ContactData(string last, string first)
         {
@@ -126,5 +127,37 @@ namespace WebAddressbookTests
                 return Regex.Replace(phone, "[ -()]", "") + "\r\n";
             }
         }
+
+        public string ContactDetailsPageText
+        {
+            get
+            {
+                if (contactDetailsPageText != null)
+                {
+                    return contactDetailsPageText;
+                }
+                else
+                {
+                    return (CleanUpContactDetailsPageText(contactDetailsPageText)).Trim();
+                }
+            }
+            set
+            {
+                contactDetailsPageText = value;
+            }
+        }
+
+        private string CleanUpContactDetailsPageText(string dataPage)
+        {
+            if (dataPage == null || dataPage == "")
+            {
+                return "";
+            }
+            else
+            {
+                return Regex.Replace(dataPage, "[ -()]", "") + "\r\n";
+            }
+        }
+
     }
 }

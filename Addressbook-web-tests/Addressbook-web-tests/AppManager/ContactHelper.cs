@@ -221,7 +221,12 @@ namespace WebAddressbookTests
         {
             manager.Navigator.ReturnToMainPage();
             OpenContactDetailsPage(0);
+            string contactDetailsPageText = driver.FindElement(By.CssSelector("#content")).Text;
 
+            return new ContactData("", "")
+            {
+                ContactDetailsPageText = contactDetailsPageText
+            };
 
         }
     }
