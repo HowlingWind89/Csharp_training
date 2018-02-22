@@ -11,7 +11,6 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
-        private string contactDataPageText;
 
         public ContactData(string last, string first)
         {
@@ -40,9 +39,8 @@ namespace WebAddressbookTests
         public override string ToString()
         {
             return "LastName=" + LastName + "\nFirstName=" + FirstName + "\nAddress=" + Address
-                + "\nAllPhones=" + AllPhones + "\nAllEmails=" + AllEmails;
+                + "\nAllPhines=" + AllPhones + "\nAllEmails=" + AllEmails;
         }
-
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -71,7 +69,7 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (allEmails != null)
+                if(allEmails != null)
                 {
                     return allEmails;
                 }
@@ -119,45 +117,13 @@ namespace WebAddressbookTests
 
         private string CleanUp(string phone)
         {
-            if (phone == null || phone == "")
+            if(phone == null || phone == "")
             {
                 return "";
             }
             else
             {
                 return Regex.Replace(phone, "[ -()]", "") + "\r\n";
-            }
-        }
-
-        public string ContactDataPageText
-        {
-            get
-            {
-                if (contactDataPageText != null)
-                {
-                    return contactDataPageText;
-                }
-                else
-                {
-                    return (CleanUpContactDataPageText(ContactDataPageText)).Trim();
-                }
-            }
-            set
-            {
-                contactDataPageText = value;
-            }
-        }
-
-
-        private string CleanUpContactDataPageText(string dataPage)
-        {
-            if (dataPage == null || dataPage == "")
-            {
-                return "";
-            }
-            else
-            {
-                return Regex.Replace(dataPage, "[ -()]", "") + "\r\n";
             }
         }
     }

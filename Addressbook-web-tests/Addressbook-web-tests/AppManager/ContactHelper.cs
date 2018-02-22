@@ -189,7 +189,7 @@ namespace WebAddressbookTests
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            return new ContactData(firstName, lastName)
+            return new ContactData(lastName, firstName)
             {
                 Address = address,
                 Email = email,
@@ -209,7 +209,7 @@ namespace WebAddressbookTests
             return Int32.Parse(m.Value);
         }
 
-        public ContactHelper OpenContactDetailsPage(int index)
+       /* public ContactHelper OpenContactDetailsPage(int index)
         {
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[6]
@@ -221,12 +221,8 @@ namespace WebAddressbookTests
         {
             manager.Navigator.ReturnToMainPage();
             OpenContactDetailsPage(0);
-            string contactDataPageText = driver.FindElement(By.CssSelector("#content")).Text;
 
-            return new ContactData("", "")
-            {
-                ContactDataPageText = contactDataPageText
-            };
-        }
+
+        }*/
     }
 }
