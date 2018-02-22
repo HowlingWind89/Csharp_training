@@ -209,7 +209,7 @@ namespace WebAddressbookTests
             return Int32.Parse(m.Value);
         }
 
-       /* public ContactHelper OpenContactDetailsPage(int index)
+        public ContactHelper OpenContactDetailsPage(int index)
         {
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[6]
@@ -223,6 +223,6 @@ namespace WebAddressbookTests
             OpenContactDetailsPage(0);
 
 
-        }*/
+        }
     }
 }
