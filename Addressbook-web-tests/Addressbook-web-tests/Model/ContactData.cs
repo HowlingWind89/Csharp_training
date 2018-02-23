@@ -13,10 +13,10 @@ namespace WebAddressbookTests
         private string allEmails;
         private string contactDetailsPageText;
 
-        public ContactData(string last, string first)
+        public ContactData(string first, string last)
         {
-            LastName = last;
             FirstName = first;
+            LastName = last;
         }
 
         public bool Equals(ContactData other)
@@ -29,17 +29,17 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return LastName == other.LastName && FirstName == other.FirstName;
+            return FirstName == other.FirstName && LastName == other.LastName;
         }
 
         public override int GetHashCode()
         {
-            return LastName.GetHashCode() + FirstName.GetHashCode();
+            return FirstName.GetHashCode() + LastName.GetHashCode();
         }
 
         public override string ToString()
         {
-            return "LastName=" + LastName + "\nFirstName=" + FirstName + "\nAddress=" + Address
+            return "FirstName=" + FirstName + "\nLastName=" + LastName + "\nAddress=" + Address
                 + "\nAllPhines=" + AllPhones + "\nAllEmails=" + AllEmails;
         }
         public int CompareTo(ContactData other)
@@ -48,7 +48,7 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return (LastName + FirstName).CompareTo(other.LastName + other.FirstName);
+            return (FirstName + LastName).CompareTo(other.FirstName + other.LastName);
         }
 
         public string FirstName { get; set; }
@@ -128,36 +128,6 @@ namespace WebAddressbookTests
             }
         }
 
-        public string ContactDetailsPageText
-        {
-            get
-            {
-                if (contactDetailsPageText != null)
-                {
-                    return contactDetailsPageText;
-                }
-                else
-                {
-                    return (CleanUpContactDetailsPageText(contactDetailsPageText)).Trim();
-                }
-            }
-            set
-            {
-                contactDetailsPageText = value;
-            }
-        }
-
-        private string CleanUpContactDetailsPageText(string dataPage)
-        {
-            if (dataPage == null || dataPage == "")
-            {
-                return "";
-            }
-            else
-            {
-                return Regex.Replace(dataPage, "[ -()]", "") + "\r\n";
-            }
-        }
-
+        public string ContactDetailsPageText { get; set; }
     }
 }
