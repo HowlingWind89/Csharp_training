@@ -20,7 +20,8 @@ namespace WebAddressbookTests
             ContactData fromTable = app.Contact.GetContactInformationFromTable(0);
             ContactData fromForm = app.Contact.GetContactInformationFromEditForm(0);
 
-            Assert.AreEqual(fromTable, fromForm);
+            Assert.AreEqual(fromTable.FirstName, fromForm.FirstName);
+            Assert.AreEqual(fromTable.LastName, fromForm.LastName);
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
@@ -32,8 +33,9 @@ namespace WebAddressbookTests
             ContactData fromForm = app.Contact.GetContactInformationFromEditForm(0);
             ContactData fromDetailsPage = app.Contact.GetContactInformationFromDetailsPage(0);
 
-            Assert.AreEqual(fromForm.LastName + fromForm.FirstName
-                + fromForm.AllPhones + fromForm.AllEmails, fromDetailsPage.ContactDetailsPageText);
+            Assert.AreEqual(fromForm.FirstName + fromForm.LastName 
+                + fromForm.HomePhone + fromForm.MobilePhone + fromForm.WorkPhone
+                + fromForm.Email + fromForm.Email2 + fromForm.Email3, fromDetailsPage.ContactDetailsPageText);
         }
     }
 }

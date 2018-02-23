@@ -141,7 +141,7 @@ namespace WebAddressbookTests
                 {
                     string LastName = element.FindElement(By.XPath("./td[2]")).Text;
                     string FirstName = element.FindElement(By.XPath("./td[3]")).Text;
-                    contactCache.Add(new ContactData(LastName, FirstName)
+                    contactCache.Add(new ContactData(FirstName, LastName)
                     {
                         Id = element.FindElement(By.TagName("input")).GetAttribute("value")
                     });
@@ -166,7 +166,7 @@ namespace WebAddressbookTests
             string allEmails = cells[4].Text;
             string allPhones = cells[5].Text;
 
-            return new ContactData(lastName, firstName)
+            return new ContactData(firstName, lastName)
             {
                 Address = address,
                 AllEmails = allEmails,
@@ -189,7 +189,7 @@ namespace WebAddressbookTests
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            return new ContactData(lastName, firstName)
+            return new ContactData(firstName, lastName)
             {
                 Address = address,
                 Email = email,
@@ -222,6 +222,7 @@ namespace WebAddressbookTests
             manager.Navigator.ReturnToMainPage();
             OpenContactDetailsPage(0);
             string contactDetailsPageText = driver.FindElement(By.CssSelector("#content")).Text;
+            contactDetailsPageText = Regex.Replace(contactDetailsPageText, "[ HMW:\r\n]", "").Trim();
 
             return new ContactData("", "")
             {
