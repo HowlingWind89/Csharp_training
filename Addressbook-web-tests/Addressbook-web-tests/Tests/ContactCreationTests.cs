@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
+using System.IO;
 
 namespace WebAddressbookTests
 {
@@ -28,7 +29,22 @@ namespace WebAddressbookTests
             return contacts;
         }
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        public static IEnumerable<ContactData> ContactDataFromFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contacts.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contacts.Add(new ContactData(parts[0], parts[1])
+                {
+
+                });
+            }
+            return contacts;
+        }
+
+        [Test, TestCaseSource("ContactDataFromFile")]
         public void ContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContacts = app.Contact.GetContactList();
