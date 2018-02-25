@@ -40,7 +40,7 @@ namespace WebAddressbookTests
         {
             return "FirstName=" + FirstName + "\nLastName=" + LastName + "\nAddress=" + Address
                 + "\nAllPhones=" + AllPhones + "\nAllEmails=" + AllEmails
-                + "\nAllPhines=" + AllPhones + "\nAllEmails=" + AllEmails;
+                + "\nAllPhones=" + AllPhones + "\nAllEmails=" + AllEmails;
         }
         public int CompareTo(ContactData other)
         {
