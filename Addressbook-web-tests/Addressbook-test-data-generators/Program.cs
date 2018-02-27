@@ -7,6 +7,7 @@ using WebAddressbookTests;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Addressbook_test_data_generators
 {
@@ -18,7 +19,7 @@ namespace Addressbook_test_data_generators
             StreamWriter writer = new StreamWriter(args[1]);
             string format = args[2];
 
-            if (args[1] == "groups.xml" || args[1] == "groups.csv")
+            if (args[1] == "groups.xml" || args[1] == "groups.csv" || args[1] == "groups.json")
             {
                 List<GroupData> groups = new List<GroupData>();
                 for (int i = 0; i < count; i++)
@@ -38,6 +39,10 @@ namespace Addressbook_test_data_generators
                 {
                     writeGroupsToXmlFile(groups, writer);
                 }
+                else if (format == "json")
+                {
+                    writeGroupsToJsonFile(groups, writer);
+                }
                 else
                 {
                     System.Console.Out.Write("Unrecognized format " + format);
@@ -45,7 +50,7 @@ namespace Addressbook_test_data_generators
                 writer.Close();
             }
 
-            else if (args[1] == "contacts.xml" || args[1] == "contacts.csv")
+            else if (args[1] == "contacts.xml" || args[1] == "contacts.csv" || args[1] == "contacts.json")
             {
                 List<ContactData> contacts = new List<ContactData>();
                 for (int i = 0; i < count; i++)
@@ -63,6 +68,10 @@ namespace Addressbook_test_data_generators
                 else if (format == "xml")
                 {
                     writeContactsToXmlFile(contacts, writer);
+                }
+                else if (format == "json")
+                {
+                    writeContactsToJsonFile(contacts, writer);
                 }
                 else
                 {
@@ -89,14 +98,24 @@ namespace Addressbook_test_data_generators
         {
             foreach (ContactData contact in contacts)
             {
-                writer.WriteLine(String.Format("${0},${1},${2}",
-                    contact.FirstName, contact.LastName, contact.MobilePhone));
+                writer.WriteLine(String.Format("${0},${1}",
+                    contact.FirstName, contact.LastName));
             }
         }
 
         static void writeContactsToXmlFile(List<ContactData> contacts, StreamWriter writer)
         {
             new XmlSerializer(typeof(List<ContactData>)).Serialize(writer, contacts);
+        }
+
+        static void writeGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
+        }
+
+        static void writeContactsToJsonFile(List<ContactData> contacts, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }

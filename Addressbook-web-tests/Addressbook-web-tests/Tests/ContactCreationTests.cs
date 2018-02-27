@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace WebAddressbookTests
 {
@@ -52,7 +53,14 @@ namespace WebAddressbookTests
                 new XmlSerializer(typeof(List<ContactData>)).Deserialize(new StreamReader(@"contacts.xml"));
         }
 
-        [Test, TestCaseSource("ContactDataFromXmlFile")]
+        public static IEnumerable<ContactData> ContactDataFromJsonlFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                 File.ReadAllText(@"contacts.json"));
+        }
+
+        [Test, TestCaseSource("ContactDataFromCsvFile"), 
+            TestCaseSource("ContactDataFromXmlFile"), TestCaseSource("ContactDataFromJsonlFile")]
         public void ContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContacts = app.Contact.GetContactList();
