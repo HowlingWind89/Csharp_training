@@ -18,66 +18,85 @@ namespace Addressbook_test_data_generators
             int count = Convert.ToInt32(args[0]);
             StreamWriter writer = new StreamWriter(args[1]);
             string format = args[2];
+            string dataType = args[3];
 
-            if (args[1] == "groups.xml" || args[1] == "groups.csv" || args[1] == "groups.json")
+            if (args[3] == "group")
             {
-                List<GroupData> groups = new List<GroupData>();
-                for (int i = 0; i < count; i++)
+                if (args[1] == "groups.xml" || args[1] == "groups.csv" || args[1] == "groups.json")
                 {
-                    groups.Add(new GroupData(TestBase.GenerateRandomString(10))
+                    List<GroupData> groups = new List<GroupData>();
+                    for (int i = 0; i < count; i++)
                     {
-                        Header = TestBase.GenerateRandomString(100),
-                        Footer = TestBase.GenerateRandomString(100)
-                    });
-                }
+                        groups.Add(new GroupData(TestBase.GenerateRandomString(10))
+                        {
+                            Header = TestBase.GenerateRandomString(100),
+                            Footer = TestBase.GenerateRandomString(100)
+                        });
+                    }
 
-                if (format == "csv")
-                {
-                    writeGroupsToCsvFile(groups, writer);
-                }
-                else if (format == "xml")
-                {
-                    writeGroupsToXmlFile(groups, writer);
-                }
-                else if (format == "json")
-                {
-                    writeGroupsToJsonFile(groups, writer);
+                    if (format == "csv")
+                    {
+                        writeGroupsToCsvFile(groups, writer);
+                    }
+                    else if (format == "xml")
+                    {
+                        writeGroupsToXmlFile(groups, writer);
+                    }
+                    else if (format == "json")
+                    {
+                        writeGroupsToJsonFile(groups, writer);
+                    }
+                    else
+                    {
+                        System.Console.Out.Write("Unrecognized format: " + format);
+                    }
+                    writer.Close();
                 }
                 else
                 {
-                    System.Console.Out.Write("Unrecognized format " + format);
+                    System.Console.Out.Write("Incorrect file name for 'group' data type: " + writer);
                 }
-                writer.Close();
             }
-
-            else if (args[1] == "contacts.xml" || args[1] == "contacts.csv" || args[1] == "contacts.json")
+            else if (args[3] == "contact")
             {
-                List<ContactData> contacts = new List<ContactData>();
-                for (int i = 0; i < count; i++)
+                if (args[1] == "contacts.xml" || args[1] == "contacts.csv" || args[1] == "contacts.json")
                 {
-                    contacts.Add(new ContactData(TestBase.GenerateRandomString(10), TestBase.GenerateRandomString(10))
+                    List<ContactData> contacts = new List<ContactData>();
+                    for (int i = 0; i < count; i++)
                     {
+                        contacts.Add(new ContactData(TestBase.GenerateRandomString(10), TestBase.GenerateRandomString(10))
+                        {
 
-                    });
-                }
+                        });
+                    }
 
-                if (format == "csv")
-                {
-                    writeContactsToCsvFile(contacts, writer);
-                }
-                else if (format == "xml")
-                {
-                    writeContactsToXmlFile(contacts, writer);
-                }
-                else if (format == "json")
-                {
-                    writeContactsToJsonFile(contacts, writer);
+                    if (format == "csv")
+                    {
+                        writeContactsToCsvFile(contacts, writer);
+                    }
+                    else if (format == "xml")
+                    {
+                        writeContactsToXmlFile(contacts, writer);
+                    }
+                    else if (format == "json")
+                    {
+                        writeContactsToJsonFile(contacts, writer);
+                    }
+                    else
+                    {
+                        System.Console.Out.Write("Unrecognized format: " + format);
+                    }
+                    writer.Close();
                 }
                 else
                 {
-                    System.Console.Out.Write("Unrecognized format " + format);
+                    System.Console.Out.Write("Incorrect file name for 'contact' data type: " + writer);
                 }
-                writer.Close();
+            }
+            else
+            {
+                System.Console.Out.Write("Unrecognized data type: " + dataType + 
+                    "\nAcceptable data types are 'group' and 'contact'");
             }
         }
         static void writeGroupsToCsvFile(List<GroupData> groups, StreamWriter writer)
