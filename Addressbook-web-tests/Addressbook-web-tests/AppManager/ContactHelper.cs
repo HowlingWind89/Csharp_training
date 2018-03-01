@@ -66,6 +66,16 @@ namespace WebAddressbookTests
                 return this;
         }
 
+        public ContactHelper Remove(ContactData contact)
+        {
+            manager.Navigator.ReturnToMainPage();
+            SelectContact(contact.Id);
+            RemoveContact();
+            ConfirmAlert();
+            manager.Navigator.ReturnToMainPage();
+            return this;
+        }
+
         public ContactHelper FillNewContactForm(ContactData contact)
         {
 
@@ -87,6 +97,12 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @id='"+id+"'])")).Click();
             return this;
         }
 

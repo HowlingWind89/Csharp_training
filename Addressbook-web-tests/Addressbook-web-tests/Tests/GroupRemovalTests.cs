@@ -11,29 +11,30 @@ using System.Collections.Generic;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         [Test]
         public void GroupRemovalTest()
         {
             if (app.Groups.IsGroupExists() == true)
             {
-                List<GroupData> oldGroups = app.Groups.GetGroupList();
-                GroupData oldData = oldGroups[0];
+                List<GroupData> oldGroups = GroupData.GetAll();
+                //GroupData oldData = oldGroups[0];
+                GroupData toBeRemoved = oldGroups[0];
 
-                app.Groups.Remove(0);
+                app.Groups.Remove(toBeRemoved);
 
                 Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 
-                List<GroupData> newGroups = app.Groups.GetGroupList();
+                List<GroupData> newGroups = GroupData.GetAll();
 
-                GroupData toBeRemoved = oldGroups[0];
+                //GroupData toBeRemoved = oldGroups[0];
                 oldGroups.RemoveAt(0);
                 Assert.AreEqual(oldGroups, newGroups);
 
                 foreach(GroupData group in newGroups)
                 {
-                    Assert.AreNotEqual(group.Id, oldData.Id);
+                    Assert.AreNotEqual(group.Id, toBeRemoved);
                 }
             }
             else if(app.Groups.IsGroupExists() == false)
