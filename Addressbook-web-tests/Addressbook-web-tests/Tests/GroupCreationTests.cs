@@ -85,7 +85,7 @@ namespace WebAddressbookTests
 
         [Test, TestCaseSource("GroupDataFromCsvFile"),
             TestCaseSource("GroupDataFromXmlFile"),
-            TestCaseSource("GroupDataFromJsonFile"), TestCaseSource("GroupDataFromExcelFile")]
+            TestCaseSource("GroupDataFromJsonFile"), /*TestCaseSource("GroupDataFromExcelFile")*/]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = GroupData.GetAll();
@@ -131,6 +131,15 @@ namespace WebAddressbookTests
             List<GroupData> fromDb = GroupData.GetAll();
             end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
+        }
+
+        [Test]
+        public void TestGroupsConnectvity()
+        {
+            foreach(ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact);
+            }
         }
     }
 }

@@ -83,7 +83,7 @@ namespace WebAddressbookTests
 
         [Test, TestCaseSource("ContactDataFromCsvFile"), 
             TestCaseSource("ContactDataFromXmlFile"), 
-            TestCaseSource("ContactDataFromJsonFile"), TestCaseSource("ContactDataFromExcelFile")]
+            TestCaseSource("ContactDataFromJsonFile"), /*TestCaseSource("ContactDataFromExcelFile")*/]
         public void ContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContacts = ContactData.GetAll();
@@ -117,6 +117,20 @@ namespace WebAddressbookTests
 
         [Test]
         public void TestContactsDBConnectvity()
+        {
+            DateTime start = DateTime.Now;
+            List<ContactData> fromUi = app.Contact.GetContactList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            List<ContactData> fromDb = ContactData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+        }
+
+        [Test]
+        public void TestContactsConnectvity()
         {
             DateTime start = DateTime.Now;
             List<ContactData> fromUi = app.Contact.GetContactList();

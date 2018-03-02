@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="AppManager\ContactHelper.cs" />
     <Compile Include="Model\AddressBookDB.cs" />
+    <Compile Include="Model\GroupContactRelation.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactInformationTests.cs" />
     <Compile Include="Tests\ContactModificationTests.cs" />
