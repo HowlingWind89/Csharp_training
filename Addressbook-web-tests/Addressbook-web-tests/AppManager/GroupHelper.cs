@@ -39,11 +39,11 @@ namespace WebAddressbookTests
             return this;
         }*/
 
-        public GroupHelper Modify(string id, GroupData newData)
+        public GroupHelper Modify(GroupData group, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
 
-            SelectGroup(id);
+            SelectGroup(group.Id);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();

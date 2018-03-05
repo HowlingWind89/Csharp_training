@@ -31,11 +31,11 @@ namespace WebAddressbookTests
                 return this;
         }*/
 
-        public ContactHelper ModifyContact(string contactId, ContactData newContactData)
+        public ContactHelper ModifyContact(ContactData contact, ContactData newContactData)
         {
             manager.Navigator.ReturnToMainPage();
 
-            SelectContact(contactId);
+            SelectContact(contact.Id);
             InitContactModification(0);
             FillNewContactForm(newContactData);
             SubmitContactModification();

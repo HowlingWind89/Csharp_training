@@ -14,7 +14,7 @@ namespace WebAddressbookTests
         {
             GroupData group = GroupData.GetAll()[0];
             List<ContactData> oldList = group.GetContacts();
-            ContactData contact = ContactData.GetAll().Except(oldList).FirstOrDefault();
+            ContactData contact = oldList.FirstOrDefault();
 
             app.Contact.RemoveContactFromGroup(contact, group);
 

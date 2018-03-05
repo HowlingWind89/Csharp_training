@@ -23,7 +23,7 @@ namespace WebAddressbookTests
                 //GroupData oldData = oldGroups[0];
                 GroupData toBeModified = oldGroups[0];
 
-                app.Groups.Modify(toBeModified.Id, newData);
+                app.Groups.Modify(toBeModified, newData);
 
                 Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
