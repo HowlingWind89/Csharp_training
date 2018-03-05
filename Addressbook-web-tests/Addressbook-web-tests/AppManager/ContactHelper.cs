@@ -250,13 +250,25 @@ namespace WebAddressbookTests
             manager.Navigator.ReturnToMainPage();
             OpenContactDetailsPage(0);
             string contactDetailsPageText = driver.FindElement(By.CssSelector("#content")).Text;
-            contactDetailsPageText = Regex.Replace(contactDetailsPageText, "[ HMW:\r\n]", "").Trim();
 
             return new ContactData("", "")
             {
                 ContactDetailsPageText = contactDetailsPageText
             };
 
+        }
+
+        public ContactData GetContactInformationFromDetailsPageAndTrim(int index)
+        {
+            manager.Navigator.ReturnToMainPage();
+            OpenContactDetailsPage(0);
+            string contactDetailsPageTextTrim = driver.FindElement(By.CssSelector("#content")).Text;
+            contactDetailsPageTextTrim = Regex.Replace(contactDetailsPageTextTrim, "[ HMW:\r\n]", "").Trim();
+
+            return new ContactData("", "")
+            {
+                ContactDetailsPageTextTrim = contactDetailsPageTextTrim
+            };
         }
 
 

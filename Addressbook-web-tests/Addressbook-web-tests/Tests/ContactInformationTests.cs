@@ -31,11 +31,25 @@ namespace WebAddressbookTests
         public void TestContactDetailsPage()
         {
             ContactData fromForm = app.Contact.GetContactInformationFromEditForm(0);
-            ContactData fromDetailsPage = app.Contact.GetContactInformationFromDetailsPage(0);
 
-            Assert.AreEqual(fromForm.FirstName + fromForm.LastName 
+            if (fromForm.FirstName != "" && fromForm.LastName != "" && fromForm.HomePhone != "" &&
+                fromForm.MobilePhone != "" && fromForm.WorkPhone != "" &&
+                fromForm.Email != "" && fromForm.Email2 != "" && fromForm.Email3 != "")
+            {
+                ContactData fromDetailsPage = app.Contact.GetContactInformationFromDetailsPage(0);
+                Assert.AreEqual(fromForm.FirstName + " " + fromForm.LastName + "\r\n"
+                   + "\r\nH: " + fromForm.HomePhone + "\r\nM: " + fromForm.MobilePhone + "\r\nW: " + fromForm.WorkPhone + "\r\n"
+                   + "\r\n" + fromForm.Email + "\r\n" + fromForm.Email2 + "\r\n" + fromForm.Email3, fromDetailsPage.ContactDetailsPageText);
+            }
+            else if (fromForm.FirstName == "" || fromForm.LastName == "" || fromForm.HomePhone == "" ||
+                fromForm.MobilePhone == "" || fromForm.WorkPhone == "" ||
+                fromForm.Email == "" || fromForm.Email2 == "" || fromForm.Email3 == "")
+            { 
+                ContactData fromDetailsPageTrim = app.Contact.GetContactInformationFromDetailsPageAndTrim(0);
+                Assert.AreEqual(fromForm.FirstName + fromForm.LastName
                 + fromForm.HomePhone + fromForm.MobilePhone + fromForm.WorkPhone
-                + fromForm.Email + fromForm.Email2 + fromForm.Email3, fromDetailsPage.ContactDetailsPageText);
+                + fromForm.Email + fromForm.Email2 + fromForm.Email3, fromDetailsPageTrim.ContactDetailsPageTextTrim);
+            } 
         }
     }
 }

@@ -45,7 +45,6 @@ namespace WebAddressbookTests
         public override string ToString()
         {
             return "FirstName=" + FirstName + "\nLastName=" + LastName + "\nAddress=" + Address
-                + "\nAllPhones=" + AllPhones + "\nAllEmails=" + AllEmails
                 + "\nAllPhones=" + AllPhones + "\nAllEmails=" + AllEmails;
         }
         public int CompareTo(ContactData other)
@@ -153,6 +152,7 @@ namespace WebAddressbookTests
         }
 
         public string ContactDetailsPageText { get; set; }
+        public string ContactDetailsPageTextTrim { get; set; }
 
         public static List<ContactData> GetAll()
         {
