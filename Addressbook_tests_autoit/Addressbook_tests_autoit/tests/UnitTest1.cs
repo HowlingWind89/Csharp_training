@@ -10,7 +10,6 @@ namespace Addressbook_tests_autoit
         [Test]
         public void TestMethod1()
         {
-
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Addressbook_tests_autoit
 {
     public class ApplicationManager
     {
-
         public ApplicationManager()
         {
 

@@ -16,7 +16,8 @@ namespace Addressbook_tests_autoit
         {
             app = new ApplicationManager();
         }
-        
+
+
         [TestFixtureTearDown]
         public void stopApplication()
         {
