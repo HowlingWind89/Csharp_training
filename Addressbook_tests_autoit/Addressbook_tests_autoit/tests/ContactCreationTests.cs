@@ -15,8 +15,8 @@ namespace Addressbook_tests_autoit
 
             ContactData newContact = new ContactData()
             {
-                LastName = "Testerov",
-                FirstName = "Tester"
+                FirstName = "Tester",
+                LastName = "Testerov"
             };
 
             app.Contacts.Add(newContact);
