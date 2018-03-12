@@ -12,16 +12,15 @@ namespace Addressbook_tests_autoit
         public void TestGroupRemoval()
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-            GroupData ToBeRemoved = oldGroups[0];
 
             app.Groups.Remove();
 
-            /*List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups.Remove(oldGroups[0]);
             oldGroups.Sort();
             newGroups.Sort();
 
-            NUnit.Framework.Assert.AreEqual(oldGroups.Count - 1, newGroups);*/
+            NUnit.Framework.Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }
