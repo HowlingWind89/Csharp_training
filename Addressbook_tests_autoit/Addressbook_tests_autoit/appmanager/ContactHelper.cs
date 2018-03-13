@@ -14,15 +14,20 @@ namespace Addressbook_tests_autoit
         internal List<ContactData> GetContactList()
         {
             List<ContactData> list = new List<ContactData>();
-            string count = aux.ControlListView(WINTITLE, "", "WindowsForms10.Window.8.app.0.2c908d510",
+            string count = aux.ControlTreeView(WINTITLE, "", "WindowsForms10.Window.8.app.0.2c908d510",
                 "GetItemCount", "#0", "");
             for (int i = 0; i < int.Parse(count); i++)
             {
-                string itemFullName = aux.ControlListView(WINTITLE, "", "WindowsForms10.Window.8.app.0.2c908d510",
-                    "GetText", "#0|#"+i, "First name + Last name");
+                string itemFirstName = aux.ControlTreeView(WINTITLE, "", "WindowsForms10.Window.8.app.0.2c908d510",
+                    "GetText", "#0|#", "");
+
+                string itemLastName = aux.ControlTreeView(WINTITLE, "", "WindowsForms10.Window.8.app.0.2c908d510",
+                    "GetText", "#0|#", "");
+
                 list.Add(new ContactData()
                 {
-                     FirstName = itemFullName
+                    FirstName = itemFirstName,
+                    LastName = itemLastName
                 });
             }
             return list;
