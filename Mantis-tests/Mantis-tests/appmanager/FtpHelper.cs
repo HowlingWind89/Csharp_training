@@ -19,7 +19,6 @@ namespace Mantis_tests
             client.Credentials = new System.Net.NetworkCredential("mantis", "mantis");
             client.Connect();
         }
-
         public void BackupFile(String path)
         {
             String backupPath = path + ".bak";

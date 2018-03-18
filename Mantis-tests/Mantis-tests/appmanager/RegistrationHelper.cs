@@ -26,7 +26,7 @@ namespace Mantis_tests
 
         private void OpenRegistrationForm()
         {
-            driver.FindElement(By.CssSelector("a.back-to-login-link pull-left")).Click();
+            driver.FindElement(By.CssSelector("a.back-to-login-link.pull-left")).Click();
         }
 
         private void FillRegistrationForm(AccountData account)
