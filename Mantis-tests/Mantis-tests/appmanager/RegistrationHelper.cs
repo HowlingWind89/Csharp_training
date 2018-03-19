@@ -33,12 +33,11 @@ namespace Mantis_tests
         {
             driver.FindElement(By.Name("username")).SendKeys(account.Name);
             driver.FindElement(By.Name("email")).SendKeys(account.Email);
-            driver.FindElement(By.Name("email")).SendKeys(account.Email);
         }
 
         private void SubmitRegistration()
         {
-            driver.FindElement(By.CssSelector("input.button")).Click();
+            driver.FindElement(By.CssSelector("input[value='Signup']")).Click();
         }
 
     }

@@ -59,7 +59,7 @@ namespace Mantis_tests
                 int count = localFile.Read(buffer, 0, buffer.Length);
                 while(count > 0)
                 {
-                    localFile.Write(buffer, 0, count);
+                    ftpStream.Write(buffer, 0, count);
                     count = localFile.Read(buffer, 0, buffer.Length);
                 }
             }

@@ -8,4 +8,4 @@ $g_signup_use_captcha = OFF;
 
 $g_default_timezone       = 'Europe/Berlin';
 
-$g_crypto_master_salt     = 'imFK6LDZrtoTZkjUiPV7JS4aswAyuPplrOCykgh0xIo=';
+$g_crypto_master_salt     = 'qdsEmsCLtBvukHPzd2Tw7+CUHiTK/6/aNWdoCN51khw=';

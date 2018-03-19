@@ -11,8 +11,9 @@ namespace Mantis_tests
         [OneTimeSetUp]
         public void setupConfig()
         {
-            Environment.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
+            
             app.Ftp.BackupFile("/config_inc.php");
+            Environment.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
             using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
             {
                 app.Ftp.Upload("/config_inc.php", localFile);
