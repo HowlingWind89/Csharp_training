@@ -29,6 +29,9 @@ namespace Mantis_tests
                 Email = "testuser@localhost.localdomain"
             };
 
+            app.James.Delete(account);
+            app.James.Add(account);
+
             app.Registration.Register(account);
         }
 
