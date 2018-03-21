@@ -28,6 +28,8 @@ namespace Mantis_tests
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
+            loginHelper = new LoginHelper(this);
+            projectHelper = new ProjectHelper(this);
         }
 
          ~ApplicationManager()
@@ -66,5 +68,7 @@ namespace Mantis_tests
         public FtpHelper Ftp { get; set; }
         public JamesHelper James { get; set; }
         public MailHelper Mail { get; set; }
+        public LoginHelper loginHelper { get; set; }
+        public ProjectHelper projectHelper { get; set; }
     }
 }
