@@ -26,6 +26,14 @@ namespace Mantis_tests
             SumitProjectCreation();
         }
 
+        public void DeleteProject(LoginData credentials)
+        {
+            manager.loginHelper.Login(credentials);
+            OpenProject();
+            Delete();
+            ConfirmProjectDelete();
+        }
+
         public void GoToProjectManagementPage()
         {
             driver.FindElement(By.CssSelector("i.menu-icon.fa.fa-gears")).Click();
@@ -41,10 +49,28 @@ namespace Mantis_tests
         {
             driver.FindElement(By.CssSelector("input[id='project-name']")).SendKeys(projectData.ProjectName);
         }
-
         public void SumitProjectCreation()
         {
             driver.FindElement(By.CssSelector("input[value='Add Project']")).Click();
+        }
+
+        public void OpenProject()
+        {
+            GoToProjectManagementPage();
+            System.Threading.Thread.Sleep(2000);
+            driver.FindElement(By.CssSelector("td > a")).Click();
+        }
+
+        public void Delete()
+        {
+            System.Threading.Thread.Sleep(2000);
+            driver.FindElement(By.CssSelector("input[value='Delete Project']")).Click();
+        }
+
+        public void ConfirmProjectDelete()
+        {
+            System.Threading.Thread.Sleep(2000);
+            driver.FindElement(By.CssSelector("input[value='Delete Project']")).Click();
         }
     }
 }

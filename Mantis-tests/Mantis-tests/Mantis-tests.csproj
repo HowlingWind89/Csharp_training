@@ -88,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\AccoutCreationTests.cs" />
     <Compile Include="tests\ProjectCreationTests.cs" />
+    <Compile Include="tests\ProjectRemovalTests.cs" />
     <Compile Include="tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
