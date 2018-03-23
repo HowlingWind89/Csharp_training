@@ -22,6 +22,7 @@ namespace Mantis_tests
             Proceed();
             String url = GetConfirmationUrl(account);
             FillPasswordForm(url, account);
+            FillRealName(account);
             SubmitPasswordForm();
         }
 
@@ -30,18 +31,6 @@ namespace Mantis_tests
             String message = manager.Mail.GetLastMail(account);
             Match match = Regex.Match(message, @"http://\S*");
             return match.Value;
-        }
-
-        private void FillPasswordForm(string url, AccountData account)
-        {
-            driver.Url = url;
-            driver.FindElement(By.Name("password")).SendKeys(account.Password);
-            driver.FindElement(By.Name("password_confirm")).SendKeys(account.Password);
-        }
-
-        private void SubmitPasswordForm()
-        {
-            driver.FindElement(By.CssSelector("input.button")).Click();
         }
 
         private void OpenMainPage()
@@ -69,6 +58,23 @@ namespace Mantis_tests
         private void Proceed()
         {
             driver.FindElement(By.CssSelector("a.width-40.btn.btn-inverse.bigger-110.btn-success")).Click();
+        }
+
+        public void FillRealName(AccountData account)
+        {
+            driver.FindElement(By.Id("realname")).SendKeys(account.RealName);
+        }
+
+        private void FillPasswordForm(string url, AccountData account)
+        {
+            driver.Url = url;
+            driver.FindElement(By.Name("password")).SendKeys(account.Password);
+            driver.FindElement(By.Name("password_confirm")).SendKeys(account.Password);
+        }
+
+        private void SubmitPasswordForm()
+        {
+            driver.FindElement(By.CssSelector("span.submit-button")).Click();
         }
     }
 }
