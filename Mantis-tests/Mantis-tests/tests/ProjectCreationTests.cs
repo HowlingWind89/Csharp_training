@@ -22,7 +22,7 @@ namespace Mantis_tests
                 ProjectName = "Tester"
             };
 
-             app.projectHelper.CareateProject(credentials, projectData);
+            app.projectHelper.CareateProject(credentials, projectData);
         }
     }
 }
