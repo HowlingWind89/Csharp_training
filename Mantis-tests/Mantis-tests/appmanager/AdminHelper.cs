@@ -61,5 +61,28 @@ namespace Mantis_tests
             driver.FindElement(By.CssSelector("input[value='Login']")).Click();
             return driver;
         }
+
+        public List<ProjectData> GetAllProjects()
+        {
+            List<ProjectData> projects = new List<ProjectData>();
+
+            IWebDriver driver = OpenAppAndLogin();
+            driver.Url = baseURL + "/manage_proj_page.php";
+            IList<IWebElement> rows = driver.FindElements(By.CssSelector("tbody tr"));
+            foreach (IWebElement row in rows)
+            {
+                IWebElement link = driver.FindElement(By.TagName("a"));
+                string name = link.Text;
+                string href = link.GetAttribute("href");
+                Match m = Regex.Match(href, @"\d+$");
+                string id = m.Value;
+
+                projects.Add(new ProjectData()
+                {
+                    ProjectName = "test",
+                });
+            }
+            return projects;
+        }
     }
 }

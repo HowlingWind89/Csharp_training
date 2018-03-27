@@ -26,7 +26,7 @@ namespace Mantis_tests
             SumitProjectCreation();
         }
 
-        public void DeleteProject(LoginData credentials)
+        public void DeleteProject(LoginData credentials, ProjectData projectData)
         {
             manager.loginHelper.Login(credentials);
             OpenProject();
