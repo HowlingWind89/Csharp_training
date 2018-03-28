@@ -17,18 +17,22 @@ namespace Mantis_tests
                 Password = "root1",
             };
 
-            List<ProjectData> projects = app.Admin.GetAllProjects();
-
             ProjectData projectData = new ProjectData
             {
                 ProjectName = "Tester"
             };
 
-            ProjectData ExistingProject = projects.Find(x => x.ProjectName == projectData.ProjectName);
+            List<ProjectData> projects = app.Admin.GetAllProjects(credentials, projectData);
 
-            app.projectHelper.DeleteProject(credentials, ExistingProject);
-
-            app.projectHelper.CareateProject(credentials, projectData);
+            if (projects == null)
+            {
+                app.projectHelper.CareateProject(credentials, projectData);
+            }
+            else
+            {
+                app.projectHelper.DeleteProject(credentials, projectData);
+                app.projectHelper.CareateProject(credentials, projectData);
+            }
         }
     }
 }

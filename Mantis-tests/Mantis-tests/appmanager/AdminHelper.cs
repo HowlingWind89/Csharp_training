@@ -22,7 +22,7 @@ namespace Mantis_tests
         {
             List<AccountData> accounts = new List<AccountData>();
 
-            IWebDriver driver = OpenAppAndLogin();
+            OpenAppAndLogin();
             driver.Url = baseURL + "/manage_user_edit_page.php";
             IList<IWebElement> rows = driver.FindElements(By.CssSelector("table tr.row-1, table tr.row-2"));
             foreach(IWebElement row in rows)
@@ -44,30 +44,32 @@ namespace Mantis_tests
 
         public void DeleteAccout(AccountData account)
         {
-            IWebDriver driver = OpenAppAndLogin();
+            OpenAppAndLogin();
             driver.Url = baseURL + "/manage_user_edit_page.php?user_id=" + account.Id;
             driver.FindElement(By.CssSelector("input[value='Delete User']")).Click();
             driver.FindElement(By.CssSelector("input[value='Delete Account']")).Click();
         }
 
-        private IWebDriver OpenAppAndLogin()
+        public void OpenAppAndLogin()
         {
-            IWebDriver driver = new SimpleBrowserDriver();
             driver.Url = baseURL + "/login_page.php";
             System.Threading.Thread.Sleep(2000);
             driver.FindElement(By.Name("username")).SendKeys("administrator");
             driver.FindElement(By.CssSelector("input[value='Login']")).Click();
             driver.FindElement(By.Name("password")).SendKeys("root1");
             driver.FindElement(By.CssSelector("input[value='Login']")).Click();
-            return driver;
         }
 
-        public List<ProjectData> GetAllProjects()
+        public List<ProjectData> GetAllProjects(LoginData credentials, ProjectData projectData)
         {
             List<ProjectData> projects = new List<ProjectData>();
-
-            IWebDriver driver = OpenAppAndLogin();
             driver.Url = baseURL + "/manage_proj_page.php";
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData accessibleProjects = new Mantis.ProjectData();
+            accessibleProjects.name = projectData.ProjectName;
+            accessibleProjects.name = projectData.Id;
+            client.mc_projects_get_user_accessible(credentials.UserName, credentials.Password);
+
             IList<IWebElement> rows = driver.FindElements(By.CssSelector("tbody tr"));
             foreach (IWebElement row in rows)
             {
@@ -79,10 +81,19 @@ namespace Mantis_tests
 
                 projects.Add(new ProjectData()
                 {
-                    ProjectName = "test",
+                    ProjectName = name,
+                    Id = id
                 });
             }
             return projects;
+        }
+
+        public void AddProjectMantis(LoginData credentials, ProjectData projectData)
+        {
+                Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+                Mantis.ProjectData project = new Mantis.ProjectData();
+                project.name = projectData.ProjectName;
+                client.mc_project_add(credentials.UserName, credentials.Password, project);
         }
     }
 }

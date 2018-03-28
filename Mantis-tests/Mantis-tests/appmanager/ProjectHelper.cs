@@ -37,6 +37,7 @@ namespace Mantis_tests
         public void GoToProjectManagementPage()
         {
             driver.FindElement(By.CssSelector("i.menu-icon.fa.fa-gears")).Click();
+            System.Threading.Thread.Sleep(2000);
             driver.FindElement(By.LinkText("Manage Projects")).Click();
         }
 
